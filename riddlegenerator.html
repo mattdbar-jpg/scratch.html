@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riddle Generator</title>
+  <style>
+    /* ---------- Styles ---------- */
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, #1a1a40, #4b4b9d);
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0,0,0,0.7);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #000;
+    }
+
+    h1 {
+      color: #f5d742;
+      margin-bottom: 20px;
+    }
+
+    .riddle-box {
+      margin: 20px 0;
+      padding: 20px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #f5d742;
+      color: #1a1a40;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffd700;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧩 Riddle Generator</h1>
+    <p>Click the button to get a random riddle. Try to guess it before checking the answer!</p>
+
+    <div class="riddle-box">
+      <p id="riddle">Your riddle will appear here...</p>
+      <button onclick="showAnswer()">Show Answer</button>
+      <p id="answer" class="hidden"></p>
+    </div>
+
+    <button id="newRiddle" onclick="generateRiddle()">Next Riddle</button>
+  </div>
+
+  <script>
+    /* ---------- Scripts ---------- */
+    const riddles = [
+      { question: "I speak without a mouth and hear without ears. I have nobody, but I come alive with wind. What am I?", answer: "An echo" },
+      { question: "The more of this there is, the less you see. What is it?", answer: "Darkness" },
+      { question: "I’m tall when I’m young, and I’m short when I’m old. What am I?", answer: "A candle" },
+      { question: "What has keys but can’t open locks?", answer: "A piano" },
+      { question: "What has hands but can’t clap?", answer: "A clock" }
+    ];
+
+    let currentRiddle = 0;
+
+    function generateRiddle() {
+      const randomIndex = Math.floor(Math.random() * riddles.length);
+      currentRiddle = randomIndex;
+      document.getElementById('riddle').innerText = riddles[randomIndex].question;
+      document.getElementById('answer').classList.add('hidden');
+      document.getElementById('answer').innerText = '';
+    }
+
+    function showAnswer() {
+      document.getElementById('answer').innerText = riddles[currentRiddle].answer;
+      document.getElementById('answer').classList.remove('hidden');
+    }
+
+    // Initialize first riddle
+    generateRiddle();
+  </script>
+</body>
+</html>
